@@ -4,6 +4,7 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 camera.position.z = 1;
 
 const renderer = new THREE.WebGLRenderer();
+const sprite = new THREE.Sprite(material);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -11,9 +12,9 @@ const loader = new THREE.TextureLoader();
 loader.load('assets/shogun_cac.png', 
     function (texture) {
 		const material = new THREE.SpriteMaterial({ map: texture });
-		const sprite = new THREE.Sprite(material);
-	        const aspect = window.innerWidth / window.innerHeight;
-	        sprite.scale.set(aspect, 1, 1);
+	        const frustumHeight = 2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+                const frustumWidth = frustumHeight * camera.aspect;
+	        sprite.scale.set(frustumWidth, frustumHeight, 1);
 		scene.add(sprite);
 		function animate() {
 			requestAnimationFrame(animate);
@@ -26,6 +27,7 @@ window.addEventListener('resize', () => {
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
-	const aspect = window.innerWidth / window.innerHeight;
-	sprite.scale.set(aspect, 1, 1);
+	const frustumHeight = 2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+        const frustumWidth = frustumHeight * camera.aspect;
+	sprite.scale.set(frustumWidth, frustumHeight, 1);
 });
