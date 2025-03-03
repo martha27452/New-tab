@@ -12,16 +12,13 @@ loader.load('assets/shogun_cac.png',
     function (texture) {
 		const material = new THREE.SpriteMaterial({ map: texture });
 		const sprite = new THREE.Sprite(material);
+	        const aspect = window.innerWidth / window.innerHeight;
+	        sprite.scale.set(aspect, 1, 1);
 		scene.add(sprite);
 		function animate() {
 			requestAnimationFrame(animate);
-			sprite.rotation.z += 0.01;
 			renderer.render(scene, camera);
 		}
 		animate();
-	},
-	null,
-	function (error) {
-		console.error('An error occurred loading the texture:', error);
 	}
 );
