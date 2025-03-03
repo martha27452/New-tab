@@ -8,7 +8,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 const loader = new THREE.TextureLoader();
-loader.load('https://drive.google.com/uc?export=view&id=1dVss5IOZiKvW-RRQ87X5l7H0uq-tRQmo', 
+loader.load('assets/shogun_cac.png', 
     function (texture) {
 		const material = new THREE.SpriteMaterial({ map: texture });
 		const sprite = new THREE.Sprite(material);
