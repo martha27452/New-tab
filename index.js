@@ -7,6 +7,7 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+let sprit;
 const loader = new THREE.TextureLoader();
 loader.load('assets/shogun_cac.png', 
     function (texture) {
@@ -23,3 +24,9 @@ loader.load('assets/shogun_cac.png',
 		animate();
 	}
 );
+
+window.addEventListener('resize', () => {
+	const frustumHeight = 2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+        const frustumWidth = frustumHeight * camera.aspect;
+        sprite.scale.set(frustumWidth, frustumHeight, 1);
+});
