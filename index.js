@@ -26,6 +26,9 @@ loader.load('assets/shogun_cac.png',
 );
 
 window.addEventListener('resize', () => {
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
 	const frustumHeight = 2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
         const frustumWidth = frustumHeight * camera.aspect;
         sprite.scale.set(frustumWidth, frustumHeight, 1);
